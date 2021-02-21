@@ -1,6 +1,6 @@
-<template>
+Gladin<template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h1>{{ test }}</h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -31,10 +31,19 @@
 </template>
 
 <script>
+import md5 from 'md5'
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  computed: {
+    ts: () => {
+      return this.ts
+    },
+    test: () => {
+      return md5( 1613902030+ "2fb45eed5cf3b68ee47cd801b46299ed22546ac1" + "cd3263fa30043ee1d75311ba6353e62c");
+    }
   }
 }
 </script>
