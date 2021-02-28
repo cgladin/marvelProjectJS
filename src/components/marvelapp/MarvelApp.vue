@@ -8,13 +8,11 @@
 </template>
 
 <script>
-import Search from './marvelapp/Search.vue'
-import ShowResult from './marvelapp/ShowResult.vue'
-import Search10Random from './marvelapp/Search10Random'
+import Search from './Search'
+import ShowResult from './ShowResult'
+import Search10Random from './Search10Random'
 export default {
   components: { ShowResult, Search , Search10Random},
-   
-
 }
 </script>
 

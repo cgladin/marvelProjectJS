@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import MarvelApp from './components/MarvelApp.vue'
+import MarvelApp from './components/marvelapp/MarvelApp'
 
 export default {
   name: 'App',

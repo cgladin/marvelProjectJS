@@ -5,9 +5,9 @@
 </template>
 
 <script>
-import {get} from '../../utils/request'
+//import {get} from '../../utils/Api'
 export default {
-  
+ 
 }
 </script>
 
