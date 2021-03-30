@@ -1,19 +1,18 @@
 <template>
   <div id="app">
-    <MarvelApp/>
+    <MarvelApp />
   </div>
 </template>
 
 <script>
-import MarvelApp from './components/marvelapp/MarvelApp'
+import MarvelApp from "./components/marvelapp/MarvelApp";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     MarvelApp
   }
-}
+};
 </script>
 
-<style>
-</style>
+<style></style>

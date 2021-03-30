@@ -15,12 +15,11 @@ export default {
   name: "MarvelApp",
   data() {
     return {
-      totalCharacters: 1493,
+      totalCharacters: 1493
     };
   },
-  components: { ShowResult, Search, Search10Random },
+  components: { ShowResult, Search, Search10Random }
 };
 </script>
 
-<style>
-</style>
+<style></style>
