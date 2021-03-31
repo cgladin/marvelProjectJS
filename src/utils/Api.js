@@ -23,7 +23,7 @@ export const get = async options => {
     }
   });
 
-  const apiGet = await fetch(
+  return await fetch(
     url +
       options.endpoint +
       "?ts=" +
@@ -41,5 +41,4 @@ export const get = async options => {
       return Promise.reject(res.status);
     }
   });
-  return apiGet;
 };
