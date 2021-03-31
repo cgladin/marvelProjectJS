@@ -1,7 +1,11 @@
 <template>
   <div>
-    {{ this.totalCharacters }}
-    <div @click="get10random()">click</div>
+    <button @click="get10random()" class="button">get10random</button>
+    <label>
+      Recherche :
+      <input type="text" v-model="searchInput" />
+    </label>
+    <button @click="handleSubmit" class="button">Search</button>
   </div>
 </template>
 
@@ -17,7 +21,8 @@ export default {
   },
   data() {
     return {
-      characters: []
+      characters: [],
+      searchInput: ""
     };
   },
   methods: {
@@ -30,6 +35,7 @@ export default {
         limit: limit,
         endpoint: "characters"
       };
+      this.characters = [];
 
       get(options).then(res => {
         if (res.data.results.length > 0) {
@@ -48,9 +54,25 @@ export default {
           this.$emit("updateCharacters", this.characters);
         }
       });
+    },
+    handleSubmit() {
+      if (this.searchInput !== "") {
+        const options = {
+          nameStartsWith: this.searchInput,
+          endpoint: "characters"
+        };
+        get(options).then(res => {
+          this.characters = res.data.results;
+          this.$emit("updateCharacters", this.characters);
+        });
+      }
     }
   }
 };
 </script>
 
-<style></style>
+<style>
+.button {
+  cursor: pointer;
+}
+</style>
