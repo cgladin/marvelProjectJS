@@ -36,7 +36,7 @@
         Le comic (titre, date, description) où est apparu le personnage pour la
         dernière fois
       </p>
-      <button>Ajouter à la team</button>
+      <button @click="addToTeam">Ajouter à la team</button>
     </div>
   </div>
 </template>
@@ -48,6 +48,9 @@ export default {
     characters: {
       type: Array
       //verifier type des objets
+    },
+    teamCharacters: {
+      type: Array
     }
   },
   data() {
@@ -64,6 +67,10 @@ export default {
     },
     setToggleShowCharacter() {
       this.toggleShowCharacter = false;
+    },
+    addToTeam() {
+      this.teamCharacters.push(this.displayedCharacter);
+      this.$emit("updateTeamCharacters", this.teamCharacters);
     }
   }
 };

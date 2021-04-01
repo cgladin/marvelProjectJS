@@ -1,13 +1,23 @@
 <template>
   <div>
     <h1>Marvel Project - Clément Gladin et Cindy Houriez</h1>
-    <Search
-      :totalCharacters="totalCharacters"
-      @updateCharacters="getCharacters"
-      @updateTeamCharacters="getTeamCharacters"
-    />
-    <ShowResult :characters="characters" />
-    <TeamBuilder :characters="teamCharacters" />
+    <div class="searchAndTeam">
+      <div class="search">
+        <Search
+          :totalCharacters="totalCharacters"
+          @updateCharacters="getCharacters"
+        />
+        <ShowResult
+          :characters="characters"
+          :teamCharacters="teamCharacters"
+          @updateTeamCharacters="getTeamCharacters"
+        />
+      </div>
+      <TeamBuilder
+        :characters="teamCharacters"
+        @updateTeamCharacters="getTeamCharacters"
+      />
+    </div>
   </div>
 </template>
 
@@ -36,4 +46,14 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.searchAndTeam {
+  display: flex;
+  flex-direction: row;
+}
+.search {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 3;
+}
+</style>
