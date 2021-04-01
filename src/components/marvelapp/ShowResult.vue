@@ -16,6 +16,7 @@
 
     <!--modal-->
     <div v-if="toggleShowCharacter" class="modal">
+      <button @click="setToggleShowCharacter">Fermer</button>
       <h3>{{ displayedCharacter.name }}</h3>
       <p>{{ displayedCharacter.description }}</p>
       <!--<div>
@@ -35,7 +36,7 @@
         Le comic (titre, date, description) où est apparu le personnage pour la
         dernière fois
       </p>
-      <button @click="setToggleShowCharacter">Fermer</button>
+      <button>Ajouter à la team</button>
     </div>
   </div>
 </template>
@@ -64,11 +65,11 @@ export default {
     setToggleShowCharacter() {
       this.toggleShowCharacter = false;
     }
-  },
+  }
 };
 </script>
 
-<style>
+<style scoped>
 .characters {
   border-radius: 10px;
   border: solid 1px #f2f2f2;

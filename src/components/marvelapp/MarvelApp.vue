@@ -4,29 +4,36 @@
     <Search
       :totalCharacters="totalCharacters"
       @updateCharacters="getCharacters"
+      @updateTeamCharacters="getTeamCharacters"
     />
     <ShowResult :characters="characters" />
+    <TeamBuilder :characters="teamCharacters" />
   </div>
 </template>
 
 <script>
 import Search from "./Search";
 import ShowResult from "./ShowResult";
+import TeamBuilder from "@/components/marvelapp/TeamBuilder";
 export default {
   name: "MarvelApp",
   data() {
     return {
       totalCharacters: 1493,
-      characters: []
+      characters: [],
+      teamCharacters: []
     };
   },
-  components: { ShowResult, Search },
+  components: { TeamBuilder, ShowResult, Search },
   methods: {
     getCharacters(value) {
       this.characters = value;
+    },
+    getTeamCharacters(value) {
+      this.teamCharacters = value;
     }
   }
 };
 </script>
 
-<style></style>
+<style scoped></style>
