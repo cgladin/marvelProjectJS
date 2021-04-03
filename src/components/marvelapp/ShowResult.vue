@@ -11,32 +11,40 @@
         :alt="character.name"
         class="thumbnailList"
       />
-      <h3>{{ character.name }}</h3>
+      <h3 class="characters-name">{{ character.name }}</h3>
     </div>
 
     <!--modal-->
     <div v-if="toggleShowCharacter" class="modal">
-      <button @click="setToggleShowCharacter">Fermer</button>
-      <h3>{{ displayedCharacter.name }}</h3>
-      <p>{{ displayedCharacter.description }}</p>
-      <!--<div>
-        diaporama image a faire
-        <img
-          v-for="image in displayedCharacter.images"
-          :src="image.path + '.' + image.extension"
-          :key="image.path"
-          :alt="displayedCharacter.name + ' image'"
-        />
-      </div>-->
-      <p>
-        Le comic (titre, date, description) où est apparu le personnage pour la
-        première fois
-      </p>
-      <p>
-        Le comic (titre, date, description) où est apparu le personnage pour la
-        dernière fois
-      </p>
-      <button @click="addToTeam">Ajouter à la team</button>
+      <div class="modal-content modal-div">
+        <button class="close" @click="setToggleShowCharacter">Fermer</button>
+        <div class="character-content">
+          <div class="character-item">
+            <img
+              :src="
+                displayedCharacter.thumbnail.path +
+                  '.' +
+                  displayedCharacter.thumbnail.extension
+              "
+              class="character-img"
+            />
+            <h3>{{ displayedCharacter.name }}</h3>
+          </div>
+          <div class="character-item">
+            <p>{{ displayedCharacter.description }}</p>
+            <p>
+              Le comic (titre, date, description) où est apparu le personnage
+              pour première fois
+            </p>
+            <p>
+              Le comic (titre, date, description) où est apparu le personnage
+              pour dernière fois
+            </p>
+          </div>
+        </div>
+
+        <button @click="addToTeam">Ajouter à la team</button>
+      </div>
     </div>
   </div>
 </template>
@@ -46,17 +54,17 @@ export default {
   name: "ShowResult",
   props: {
     characters: {
-      type: Array
+      type: Array,
       //verifier type des objets
     },
     teamCharacters: {
-      type: Array
-    }
+      type: Array,
+    },
   },
   data() {
     return {
       toggleShowCharacter: false,
-      displayedCharacter: null
+      displayedCharacter: null,
     };
   },
   methods: {
@@ -71,20 +79,41 @@ export default {
     addToTeam() {
       this.teamCharacters.push(this.displayedCharacter);
       this.$emit("updateTeamCharacters", this.teamCharacters);
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
-.characters {
-  border-radius: 10px;
-  border: solid 1px #f2f2f2;
+@import "../../assets/global.css";
+.close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+.modal-div {
+  position: relative;
+}
+.character-content {
   display: flex;
   flex-direction: row;
+  margin: 3em;
 }
-.thumbnailList {
-  height: 100px;
-  width: auto;
+.character-item {
+  display: flex;
+  flex-direction: column;
+  margin: 1em;
+}
+.character-item h3 {
+  font-size: 2em;
+  font-weight: bold;
+}
+.character-img {
+  height: 300px;
+}
+.character-content button {
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 </style>

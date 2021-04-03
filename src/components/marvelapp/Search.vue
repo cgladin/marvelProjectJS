@@ -1,11 +1,11 @@
 <template>
   <div>
-    <button @click="get10random()" class="button">get10random</button>
-    <label>
+    <button @click="get10random()" class="button">Recherche aléatoire</button>
+    <label class="label">
       Recherche :
-      <input type="text" v-model="searchInput" />
+      <input class="input" type="text" v-model="searchInput" />
     </label>
-    <button @click="handleSubmit" class="button">Search</button>
+    <button @click="handleSubmit" class="button">Rechercher</button>
   </div>
 </template>
 
@@ -72,7 +72,15 @@ export default {
 </script>
 
 <style scoped>
-.button {
-  cursor: pointer;
+.input {
+  border-radius: 22px;
+  padding: 10px 0;
+  font-size: 1.1em;
+  color: black;
+  padding-left: 15px;
+}
+.label {
+  font-size:1.2em;
+  font-weight: bold;
 }
 </style>

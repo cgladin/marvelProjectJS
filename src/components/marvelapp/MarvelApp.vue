@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1>Marvel Project - Clément Gladin et Cindy Houriez</h1>
+    <h1 class="title">
+      <img src="../../assets/MarvelLogo.svg" alt="logo marvel" />Project
+    </h1>
     <div class="searchAndTeam">
       <div class="search">
         <Search
@@ -8,16 +10,21 @@
           @updateCharacters="getCharacters"
         />
         <ShowResult
+          class="showResult"
           :characters="characters"
           :teamCharacters="teamCharacters"
           @updateTeamCharacters="getTeamCharacters"
         />
       </div>
       <TeamBuilder
+        class="team"
         :characters="teamCharacters"
         @updateTeamCharacters="getTeamCharacters"
       />
     </div>
+    <footer>
+      <h3>Clément Gladin et Cindy Houriez</h3>
+    </footer>
   </div>
 </template>
 
@@ -50,10 +57,49 @@ export default {
 .searchAndTeam {
   display: flex;
   flex-direction: row;
+  margin: 0 10em;
+  height: 70vh;
 }
 .search {
   display: flex;
   flex-direction: column;
-  flex-grow: 3;
+  width: 70%;
+  border: solid 1px #f2f2f2;
+  border-radius: 20px;
+  padding: 15px;
+  margin-right: 20px;
+  background-color: rgba(253, 250, 250, 0.5);
+}
+.team {
+  width: 30%;
+  border: solid 1px #f2f2f2;
+  border-radius: 20px;
+  background-color: #ebebeb;
+  padding: 15px;
+  background-color: rgba(253, 250, 250, 0.5);
+}
+.showResult {
+  overflow-y: scroll;
+}
+.title {
+  color: #ffff;
+  font-weight: 15px;
+  text-shadow: 2px 2px 2px black;
+  font-size: 3.2em;
+  text-align: center;
+}
+.title img {
+  height: 80px;
+}
+h3 {
+  font-size: 2em;
+  color: #ffff;
+  text-shadow: 2px 2px 2px black;
+  text-align: center;
+}
+@media screen and (max-width: 900px) {
+  .searchAndTeam {
+    flex-wrap: wrap;
+  }
 }
 </style>

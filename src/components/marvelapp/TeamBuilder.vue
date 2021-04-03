@@ -12,36 +12,40 @@
         class="thumbnailList"
       />
       <h3>{{ character.name }}</h3>
-      <button @click="removeCharacter(index)">delete</button>
+      <img src="../../assets/bin.svg" @click="removeCharacter(index)">
     </div>
-    <button @click="removeCharacters">delete Team</button>
-    <button @click="toggleEditTeamName">save Team</button>
-    <button @click="load">load Team</button>
+    <button @click="removeCharacters">Supprimer</button>
+    <button @click="toggleEditTeamName">Sauvegarder</button>
+    <button @click="load">Charger</button>
     <!--modal-->
-    <div v-if="editTeamName">
-      <div v-if="this.characters.length > 0">
-        <label>
-          Nom de la team :
-          <input type="text" v-model="teamName" />
-        </label>
-        <button @click="addTeam">Valider</button>
+    <div class="modal" v-if="editTeamName">
+      <div class="modal-content">
+        <div v-if="this.characters.length > 0">
+          <label>
+            Nom de l'équipe :
+            <input type="text" v-model="teamName" />
+          </label>
+          <button @click="addTeam">Valider</button>
+        </div>
+        <h3 v-else>Veuillez selectionner au moins 1 super héro</h3>
+        <button @click="cancelAddTeam">Annuler</button>
       </div>
-      <h3 v-else>Veuillez selectionner au moins 1 super héros</h3>
-      <button @click="cancelAddTeam">Annuler</button>
     </div>
     <!--modal-->
-    <div v-if="selectTeam">
-      <div v-if="teamsName.length > 0">
-        <h3
-          v-for="(name) in teamsName"
-          :key="name"
-          @click="loadCharacters(name)"
-        >
-          {{ name }}
-        </h3>
+    <div class="modal" v-if="selectTeam">
+      <div class="modal-content">
+        <div v-if="teamsName.length > 0">
+          <h3
+            v-for="name in teamsName"
+            :key="name"
+            @click="loadCharacters(name)"
+          >
+            {{ name }}
+          </h3>
+        </div>
+        <h3 v-else>Aucune équipe à charger</h3>
+        <button @click="toggleSelectTeam">Annuler</button>
       </div>
-      <h3 v-else>Aucune team à charger</h3>
-      <button @click="toggleSelectTeam">Annuler</button>
     </div>
   </div>
 </template>
@@ -114,4 +118,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+@import "../../assets/global.css";
+.characters {
+  justify-content: space-between;
+}
+</style>

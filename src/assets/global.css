@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+* {
+    font-family: 'Raleway', sans-serif;
+}
+body {
+    background-image: url("./marvel.jpg");
+}
+button {
+    border-radius: 22px;
+    background-color: #bb0b0b;
+    padding: 15px 20px;
+    color: #ffffff;
+    font-weight: bold;
+    border-style: none;
+    margin: 10px;
+    font-size: 1.3em;
+    cursor: pointer;
+}
+h1 {
+    font-size: 2.5em;
+}
+.modal {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    border-radius: 25px;
+}
+.thumbnailList {
+    height: 100px;
+    width: auto;
+}
+.characters {
+    border-radius: 20px;
+    border: solid 1px #f2f2f2;
+    display: flex;
+    flex-direction: row;
+    padding: 2em;
+    margin-bottom: 15px;
+    background-color: #fff;
+}
+.characters-name {
+    padding-left: 1em;
+}
