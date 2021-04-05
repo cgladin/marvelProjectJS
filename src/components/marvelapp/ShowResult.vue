@@ -159,7 +159,6 @@ export default {
           this.displayedCharacter.firstComics = res.data.results[0];
         }
       });
-      console.log(this.displayedCharacter.lastComics,this.displayedCharacter.firstComics);
       this.apiLoad = true;
       //on update la view
       this.$forceUpdate();
