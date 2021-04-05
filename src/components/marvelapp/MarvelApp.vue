@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="marvel">
     <h1 class="title">
       <img src="../../assets/MarvelLogo.svg" alt="logo marvel" />Project
     </h1>
@@ -54,6 +54,10 @@ export default {
 </script>
 
 <style scoped>
+.marvel {
+  display: flex;
+  flex-direction: column;
+}
 .searchAndTeam {
   display: flex;
   flex-direction: row;
@@ -77,29 +81,49 @@ export default {
   background-color: #ebebeb;
   padding: 15px;
   background-color: rgba(253, 250, 250, 0.5);
+  display: flex;
+  flex-direction: column;
 }
 .showResult {
   overflow-y: scroll;
 }
 .title {
   color: #ffff;
-  font-weight: 15px;
-  text-shadow: 2px 2px 2px black;
+  font-weight: bold;
+  text-shadow: 5px 5px 5px black;
   font-size: 3.2em;
   text-align: center;
 }
 .title img {
   height: 80px;
 }
-h3 {
+footer h3 {
   font-size: 2em;
   color: #ffff;
-  text-shadow: 2px 2px 2px black;
+  text-shadow: 5px 5px 5px black;
   text-align: center;
 }
+
 @media screen and (max-width: 900px) {
   .searchAndTeam {
-    flex-wrap: wrap;
+    display: block;
+  }
+  .searchAndTeam {
+    height: auto;
+    margin: 0;
+  }
+  .search {
+    width: auto;
+    max-height: 80vh;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+  .team {
+    width: auto;
+    max-height: 80vh;
+  }
+  .title {
+    font-size: 2em;
   }
 }
 </style>

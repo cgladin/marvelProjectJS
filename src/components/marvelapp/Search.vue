@@ -77,10 +77,9 @@ export default {
   padding: 10px 0;
   font-size: 1.1em;
   color: black;
-  padding-left: 15px;
 }
 .label {
-  font-size:1.2em;
+  font-size: 1.2em;
   font-weight: bold;
 }
 </style>

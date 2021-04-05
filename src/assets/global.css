@@ -4,6 +4,7 @@
 }
 body {
     background-image: url("./marvel.jpg");
+    background-repeat: no-repeat;
 }
 button {
     border-radius: 22px;
@@ -32,25 +33,31 @@ h1 {
 }
 .modal-content {
     background-color: #fefefe;
-    margin: 10% auto;
+    margin: 8% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
     border-radius: 25px;
-}
-.thumbnailList {
-    height: 100px;
-    width: auto;
 }
 .characters {
     border-radius: 20px;
     border: solid 1px #f2f2f2;
     display: flex;
     flex-direction: row;
-    padding: 2em;
     margin-bottom: 15px;
     background-color: #fff;
 }
-.characters-name {
-    padding-left: 1em;
+.successAdd {
+    position: absolute;
+    bottom: 20px;
+    right: 50%;
+    background-color: #3c9136;
+    border-radius: 10px;
+    color: white;
+    padding: 20px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+    z-index: 2;
+}
+.successAdd h2 {
+    margin: 0;
 }

@@ -1,22 +1,31 @@
 <template>
   <div>
     <h1>Marvelous Team</h1>
-    <div
-      v-for="(character, index) in characters"
-      :key="character.id + '_Team'"
-      class="characters"
-    >
-      <img
-        :src="character.thumbnail.path + '.' + character.thumbnail.extension"
-        :alt="character.name"
-        class="thumbnailList"
-      />
-      <h3>{{ character.name }}</h3>
-      <img src="../../assets/bin.svg" @click="removeCharacter(index)">
+    <div class="teamButtons">
+      <button @click="removeCharacters">Supprimer</button>
+      <button @click="toggleEditTeamName">Sauvegarder</button>
+      <button @click="load">Charger</button>
     </div>
-    <button @click="removeCharacters">Supprimer</button>
-    <button @click="toggleEditTeamName">Sauvegarder</button>
-    <button @click="load">Charger</button>
+    <div class="teamCharacters">
+      <div
+        v-for="(character, index) in characters"
+        :key="character.id + '_Team'"
+        class="characters"
+      >
+        <img
+          :src="character.thumbnail.path + '.' + character.thumbnail.extension"
+          :alt="character.name"
+          class="thumbnailList"
+        />
+        <h3>{{ character.name }}</h3>
+        <img
+          src="./../../assets/bin.svg"
+          @click="removeCharacter(index)"
+          alt="delete"
+          class="bin"
+        />
+      </div>
+    </div>
     <!--modal-->
     <div class="modal" v-if="editTeamName">
       <div class="modal-content">
@@ -25,7 +34,7 @@
             Nom de l'équipe :
             <input type="text" v-model="teamName" />
           </label>
-          <button @click="addTeam">Valider</button>
+          <button @click="saveTeam">Valider</button>
         </div>
         <h3 v-else>Veuillez selectionner au moins 1 super héro</h3>
         <button @click="cancelAddTeam">Annuler</button>
@@ -35,17 +44,27 @@
     <div class="modal" v-if="selectTeam">
       <div class="modal-content">
         <div v-if="teamsName.length > 0">
-          <h3
-            v-for="name in teamsName"
-            :key="name"
-            @click="loadCharacters(name)"
-          >
-            {{ name }}
-          </h3>
+          <div class="teams">
+            <div class="teamsName" v-for="name in teamsName" :key="name">
+              <h3 @click="loadCharacters(name)">
+                {{ name }}
+              </h3>
+              <img
+                src="./../../assets/bin.svg"
+                @click="removeTeams(name)"
+                alt="delete"
+                class="bin"
+              />
+            </div>
+          </div>
         </div>
         <h3 v-else>Aucune équipe à charger</h3>
         <button @click="toggleSelectTeam">Annuler</button>
       </div>
+    </div>
+    <!--modal-->
+    <div v-if="successAdd" class="successAdd">
+      <h2>{{ successText }}</h2>
     </div>
   </div>
 </template>
@@ -64,7 +83,9 @@ export default {
       teamsName: [],
       teamName: "",
       editTeamName: false,
-      selectTeam: false
+      selectTeam: false,
+      successAdd: false,
+      successText: ""
     };
   },
   methods: {
@@ -79,14 +100,25 @@ export default {
     removeCharacter(index) {
       this.characters.splice(index, 1);
       this.$emit("updateTeamCharacters", this.characters);
+      this.showSuccess("personnage supprimé");
     },
     removeCharacters() {
       this.$emit("updateTeamCharacters", []);
+      this.showSuccess("équipe supprimé");
+    },
+    removeTeams(name) {
+      if (localStorage.getItem("charactersTeams")) {
+        let team = this.getTeams();
+        delete team[name];
+        this.teamsName.splice(this.teamsName.indexOf(name), 1);
+        localStorage.setItem("charactersTeams", JSON.stringify(team));
+      }
     },
     loadCharacters(name) {
       if (localStorage.getItem("charactersTeams")) {
         this.teams = this.getTeams();
         this.$emit("updateTeamCharacters", this.teams[name]);
+        this.showSuccess("équipe Chargé");
         this.toggleSelectTeam();
       }
     },
@@ -100,7 +132,7 @@ export default {
       this.teamName = "";
       this.toggleEditTeamName();
     },
-    addTeam() {
+    saveTeam() {
       let team;
       if (localStorage.getItem("charactersTeams")) {
         team = this.getTeams();
@@ -109,7 +141,16 @@ export default {
       }
       team[this.teamName] = this.characters;
       localStorage.setItem("charactersTeams", JSON.stringify(team));
+      this.showSuccess("équipe sauvegarder");
       this.toggleEditTeamName();
+    },
+    showSuccess(message) {
+      this.successText = message;
+      this.successAdd = true;
+      setTimeout(() => {
+        this.successAdd = false;
+        this.successText = "";
+      }, 2000);
     },
     getTeams() {
       return JSON.parse(localStorage.getItem("charactersTeams"));
@@ -122,5 +163,47 @@ export default {
 @import "../../assets/global.css";
 .characters {
   justify-content: space-between;
+}
+.thumbnailList {
+  height: 100px;
+  border-radius: 20px 0 0 20px;
+}
+.teamButtons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.teamCharacters {
+  overflow-y: scroll;
+  height: 100%;
+}
+.bin {
+  margin-right: 10px;
+  height: 30px;
+  cursor: pointer;
+  align-self: center;
+}
+.teams {
+  display: flex;
+  flex-direction: column;
+}
+.teamsName {
+  margin: 2px;
+  padding: 5px;
+  border: solid 1px #f2f2f2;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.teamsName h3 {
+  cursor: pointer;
+}
+@media screen and (max-width: 900px) {
+  .thumbnailList {
+    display: none;
+  }
+  .characters h3 {
+    margin-left: 20px;
+  }
 }
 </style>

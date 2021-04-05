@@ -27,60 +27,130 @@
                   displayedCharacter.thumbnail.extension
               "
               class="character-img"
+              alt="character img"
             />
             <h3>{{ displayedCharacter.name }}</h3>
           </div>
           <div class="character-item">
             <p>{{ displayedCharacter.description }}</p>
-            <p>
-              Le comic (titre, date, description) où est apparu le personnage
-              pour première fois
-            </p>
-            <p>
-              Le comic (titre, date, description) où est apparu le personnage
-              pour dernière fois
-            </p>
+            <div v-if="displayedCharacter.firstComics">
+              <h4>Premier comics</h4>
+              <p>{{ displayedCharacter.firstComics.title }}</p>
+              <p>{{ firstComicsDate }}</p>
+              <p>{{ displayedCharacter.firstComics.description }}</p>
+            </div>
+            <div v-if="displayedCharacter.lastComics">
+              <h4>Dernier comics</h4>
+              <p>Titre : {{ displayedCharacter.lastComics.title }}</p>
+              <p>Date : {{ lastComicsDate }}</p>
+              <p>{{ displayedCharacter.lastComics.description }}</p>
+            </div>
           </div>
         </div>
 
         <button @click="addToTeam">Ajouter à la team</button>
       </div>
     </div>
+    <!--modal-->
+    <div v-if="popUp" :class="popupState ? 'successAdd' : 'errorAdd'">
+      <h2>{{ infoText }}</h2>
+    </div>
   </div>
 </template>
 
 <script>
+import { get } from "@/utils/Api";
 export default {
   name: "ShowResult",
   props: {
     characters: {
-      type: Array,
+      type: Array
       //verifier type des objets
     },
     teamCharacters: {
-      type: Array,
-    },
+      type: Array
+    }
   },
   data() {
     return {
       toggleShowCharacter: false,
       displayedCharacter: null,
+      popUp: false,
+      infoText: "",
+      popupState: true
     };
   },
+  computed: {
+    firstComicsDate() {
+      return new Date(
+        this.displayedCharacter.firstComics.dates.find(
+          o => o.type === "onsaleDate"
+        ).date
+      ).toLocaleDateString("fr-FR", {
+        weekday: "long",
+        month: "long",
+        day: "numeric"
+      });
+    },
+    lastComicsDate() {
+      return new Date(
+        this.displayedCharacter.lastComics.dates.find(
+          o => o.type === "onsaleDate"
+        ).date
+      ).toLocaleDateString("fr-FR", {
+        weekday: "long",
+        month: "long",
+        day: "numeric",
+        year: "numeric"
+      });
+    }
+  },
   methods: {
-    //faire defiler des images lesquels ?
-    showCharacter(character) {
+    async showCharacter(character) {
       this.toggleShowCharacter = true;
       this.displayedCharacter = character;
+      const options = {
+        orderBy: "-onsaleDate",
+        endpoint: character.id + "/comics"
+      };
+      await get(options).then(res => {
+        if (res.data.results.length > 0) {
+          this.displayedCharacter.lastComics = res.data.results[0];
+        }
+      });
+      const options2 = {
+        orderBy: "onsaleDate",
+        endpoint: character.id + "/comics"
+      };
+      await get(options2).then(res => {
+        if (res.data.results.length > 0) {
+          this.displayedCharacter.firstComics = res.data.results[0];
+        }
+      });
+      this.$forceUpdate();
     },
     setToggleShowCharacter() {
       this.toggleShowCharacter = false;
     },
     addToTeam() {
-      this.teamCharacters.push(this.displayedCharacter);
-      this.$emit("updateTeamCharacters", this.teamCharacters);
+      if (!this.teamCharacters.some(c => c.id === this.displayedCharacter.id)) {
+        this.teamCharacters.push(this.displayedCharacter);
+        this.showPopUp("Personnage ajouté", true);
+        this.$emit("updateTeamCharacters", this.teamCharacters);
+      } else {
+        this.showPopUp("Personnage déjà ajouté", false);
+      }
     },
-  },
+    showPopUp(message, state) {
+      this.infoText = message;
+      this.popUp = true;
+      this.popupState = state;
+      setTimeout(() => {
+        this.infoText = "";
+        this.popUp = false;
+      }, 2000);
+    }
+  }
 };
 </script>
 
@@ -93,6 +163,16 @@ export default {
 }
 .modal-div {
   position: relative;
+}
+.characters {
+  padding: 1em;
+}
+.thumbnailList {
+  height: 100px;
+  width: auto;
+}
+.characters-name {
+  padding-left: 1em;
 }
 .character-content {
   display: flex;
@@ -115,5 +195,19 @@ export default {
   position: absolute;
   bottom: 0;
   left: 0;
+}
+.errorAdd {
+  position: absolute;
+  bottom: 20px;
+  right: 50%;
+  background-color: red;
+  border-radius: 10px;
+  color: white;
+  padding: 20px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+.errorAdd h2 {
+  margin: 0;
 }
 </style>
