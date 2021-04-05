@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { get } from "@/utils/Api";
+import { get } from "../../utils/Api";
 export default {
   name: "Search",
   props: {

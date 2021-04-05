@@ -15,14 +15,14 @@ export const get = async options => {
       "Content-Type": "application/json"
     }
   };
-
+  //on concatène dans un string les paramètres
   let params = "";
   Object.keys(options).forEach(value => {
     if (options.endpoint !== options[value]) {
       params += "&" + value + "=" + options[value];
     }
   });
-
+  //on effectue l'appel
   return await fetch(
     url +
       options.endpoint +

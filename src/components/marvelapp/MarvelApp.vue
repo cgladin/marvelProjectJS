@@ -43,9 +43,11 @@ export default {
   },
   components: { TeamBuilder, ShowResult, Search },
   methods: {
+    //récupère les changements fais sur le tableau characters
     getCharacters(value) {
       this.characters = value;
     },
+    //récupère les changements fais sur le tableau qui contient l'équipe de personnage
     getTeamCharacters(value) {
       this.teamCharacters = value;
     }

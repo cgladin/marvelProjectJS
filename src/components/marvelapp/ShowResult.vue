@@ -14,7 +14,7 @@
       <h3 class="characters-name">{{ character.name }}</h3>
     </div>
 
-    <!--modal-->
+    <!--modal affichage détaillé d'un personnage-->
     <div v-if="toggleShowCharacter" class="modal">
       <div class="modal-content modal-div">
         <button class="close" @click="setToggleShowCharacter">Fermer</button>
@@ -65,13 +65,12 @@
 </template>
 
 <script>
-import { get } from "@/utils/Api";
+import { get } from "../../utils/Api";
 export default {
   name: "ShowResult",
   props: {
     characters: {
       type: Array
-      //verifier type des objets
     },
     teamCharacters: {
       type: Array
@@ -88,6 +87,7 @@ export default {
   },
   computed: {
     firstComicsDate() {
+      //affiche la date d'un comics sous la forme jour day mois année
       return new Date(
         this.displayedCharacter.firstComics.dates.find(
           o => o.type === "onsaleDate"
@@ -99,6 +99,7 @@ export default {
       });
     },
     lastComicsDate() {
+      //affiche la date d'un comics sous la forme jour day mois année
       return new Date(
         this.displayedCharacter.lastComics.dates.find(
           o => o.type === "onsaleDate"
@@ -113,8 +114,10 @@ export default {
   },
   methods: {
     async showCharacter(character) {
+      //affiche le character selectionné
       this.toggleShowCharacter = true;
       this.displayedCharacter = character;
+      //on récupère le dernier comics du personnage
       const options = {
         orderBy: "-onsaleDate",
         endpoint: character.id + "/comics"
@@ -124,6 +127,7 @@ export default {
           this.displayedCharacter.lastComics = res.data.results[0];
         }
       });
+      //on récupère le premier comics du personnage
       const options2 = {
         orderBy: "onsaleDate",
         endpoint: character.id + "/comics"
@@ -133,12 +137,14 @@ export default {
           this.displayedCharacter.firstComics = res.data.results[0];
         }
       });
+      //on update la view
       this.$forceUpdate();
     },
     setToggleShowCharacter() {
       this.toggleShowCharacter = false;
     },
     addToTeam() {
+      //on ajoute le personnage si il n'y est pas déjà à la team puis on fais remonté l'information
       if (!this.teamCharacters.some(c => c.id === this.displayedCharacter.id)) {
         this.teamCharacters.push(this.displayedCharacter);
         this.showPopUp("Personnage ajouté", true);
@@ -148,9 +154,10 @@ export default {
       }
     },
     showPopUp(message, state) {
+      //permet d'afficher une popup pendant 2 secondes en bas avec un message
       this.infoText = message;
       this.popUp = true;
-      this.popupState = state;
+      this.popupState = state; //pour savoir si c'est une erreur ou un success
       setTimeout(() => {
         this.infoText = "";
         this.popUp = false;

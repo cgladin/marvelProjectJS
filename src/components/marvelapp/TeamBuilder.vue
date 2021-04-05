@@ -62,7 +62,7 @@
         <button @click="toggleSelectTeam">Annuler</button>
       </div>
     </div>
-    <!--modal-->
+    <!--modal success-->
     <div v-if="successAdd" class="successAdd">
       <h2>{{ successText }}</h2>
     </div>
@@ -90,25 +90,30 @@ export default {
   },
   methods: {
     toggleEditTeamName() {
+      //permet d'afficher la modal pour sauvegarder une équipe
       this.editTeamName = !this.editTeamName;
       this.selectTeam = false;
     },
     toggleSelectTeam() {
+      //permet d'afficher la modal pour charger une équipe
       this.selectTeam = !this.selectTeam;
       this.editTeamName = false;
     },
     removeCharacter(index) {
+      //supprime un personnages de la team
       this.characters.splice(index, 1);
       this.$emit("updateTeamCharacters", this.characters);
       this.showSuccess("personnage supprimé");
     },
     removeCharacters() {
+      //supprime tous les personnages
       if (this.characters.length > 0) {
         this.$emit("updateTeamCharacters", []);
         this.showSuccess("équipe supprimé");
       }
     },
     removeTeams(name) {
+      //supprime une team du local storage
       if (localStorage.getItem("charactersTeams")) {
         let team = this.getTeams();
         delete team[name];
@@ -117,6 +122,7 @@ export default {
       }
     },
     loadCharacters(name) {
+      //charge l'équipe selectionné
       if (localStorage.getItem("charactersTeams")) {
         this.teams = this.getTeams();
         this.$emit("updateTeamCharacters", this.teams[name]);
@@ -125,16 +131,19 @@ export default {
       }
     },
     load() {
+      //charge le noms des équipe selectionnable
       if (localStorage.getItem("charactersTeams")) {
         this.teamsName = Object.keys(this.getTeams());
       }
       this.toggleSelectTeam();
     },
     cancelAddTeam() {
+      //annule la sauvegarde d'une équipe
       this.teamName = "";
       this.toggleEditTeamName();
     },
     saveTeam() {
+      //sauvegarde une équipe dans le local storage
       let team;
       if (localStorage.getItem("charactersTeams")) {
         team = this.getTeams();
@@ -147,6 +156,7 @@ export default {
       this.toggleEditTeamName();
     },
     showSuccess(message) {
+      //affiche le succès d'ajout ou de suppression
       this.successText = message;
       if (this.successAdd === false) {
         this.successAdd = true;
