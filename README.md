@@ -16,8 +16,9 @@ yarn build
 ```
 ### Utilisation de l'api marvel
 Pour utiliser l'api dans l'application il existe la méthode get(options) du fichier
-utils/api.js
-options est un objet contenant à minima l'endpoint et pour rajouter des paramètre sur la route choisi
+utils/api.js.
+
+Options (paramètre de la fonction) est un objet contenant à minima l'endpoint et pour rajouter des paramètre sur la route choisi
 il suffit de rajouter son paramètre et la valeur dans l'objet. 
 
 Exemple:
