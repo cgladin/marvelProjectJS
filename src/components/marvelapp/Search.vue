@@ -45,6 +45,7 @@ export default {
             let randomIndex = Math.floor(Math.random() * (limit - 1));
             let exist = indexSelected.some(index => index === randomIndex);
             while (exist) {
+              //on vérifie que l'on a pas déjà selectionné ce personnage
               randomIndex = Math.floor(Math.random() * (limit - 1));
               exist = indexSelected.some(index => index === randomIndex);
             }
