@@ -134,7 +134,7 @@ export default {
   methods: {
     async showCharacter(character) {
       //affiche le character selectionné
-      this.apiLoad = false;
+      this.apiLoad = false; // permet de savoir si on a terminer de fetch ou non les comics
       this.toggleShowCharacter = true;
       this.displayedCharacter = character;
       //on récupère le dernier comics du personnage
