@@ -35,6 +35,7 @@
             <p v-if="displayedCharacter.description">
               Description : {{ displayedCharacter.description }}
             </p>
+            <p v-else>Aucune description disponible pour ce personnage</p>
             <div v-if="displayedCharacter.firstComics">
               <h4>Premier comics</h4>
               <p>{{ displayedCharacter.firstComics.title }}</p>
@@ -51,6 +52,13 @@
                 {{ displayedCharacter.lastComics.description }}
               </p>
             </div>
+            <p
+              v-if="
+                !displayedCharacter.firstComics && displayedCharacter.lastComics
+              "
+            >
+              Aucun comics disponible
+            </p>
           </div>
         </div>
 
