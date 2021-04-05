@@ -84,6 +84,7 @@ export default {
   border-bottom: solid 2px #bb0b0b;
 }
 .label {
+  color: white;
   font-size: 1.1em;
   font-weight: bold;
 }

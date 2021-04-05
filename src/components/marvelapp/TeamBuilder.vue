@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Marvelous Team</h1>
+    <h1 class="titleTeam">Marvelous Team</h1>
     <div class="teamButtons">
       <button @click="removeCharacters">Supprimer</button>
       <button @click="toggleEditTeamName">Sauvegarder</button>
@@ -201,6 +201,9 @@ export default {
 }
 .teamsName h3 {
   cursor: pointer;
+}
+.titleTeam {
+  color: white;
 }
 @media screen and (max-width: 900px) {
   .thumbnailList {

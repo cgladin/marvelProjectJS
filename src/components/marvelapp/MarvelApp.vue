@@ -68,19 +68,20 @@ export default {
   display: flex;
   flex-direction: column;
   width: 70%;
-  border: solid 1px #f2f2f2;
+  border: solid 1px #34383a;
   border-radius: 20px;
   padding: 15px;
   margin-right: 20px;
-  background-color: rgba(253, 250, 250, 0.65);
+  background-color: rgba(33, 19, 19, 0.65);
+  //background-color: rgba(253, 250, 250, 0.65);
 }
 .team {
   width: 30%;
-  border: solid 1px #f2f2f2;
+  border: solid 1px #34383a;
   border-radius: 20px;
   background-color: #ebebeb;
   padding: 15px;
-  background-color: rgba(253, 250, 250, 0.65);
+  background-color: rgba(33, 19, 19, 0.65);
   display: flex;
   flex-direction: column;
 }
@@ -90,7 +91,7 @@ export default {
 .title {
   color: #ffff;
   font-weight: bold;
-  text-shadow: 5px 5px 5px black;
+  text-shadow: 0 0 5px black;
   font-size: 3.2em;
   text-align: center;
 }
@@ -100,7 +101,7 @@ export default {
 footer h3 {
   font-size: 2em;
   color: #ffff;
-  text-shadow: 5px 5px 5px black;
+  text-shadow: 0 0 5px black;
   text-align: center;
 }
 
