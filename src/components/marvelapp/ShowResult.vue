@@ -120,7 +120,8 @@ export default {
       //on récupère le dernier comics du personnage
       const options = {
         orderBy: "-onsaleDate",
-        endpoint: character.id + "/comics"
+        limit: 1,
+        endpoint: "characters/" + character.id + "/comics"
       };
       await get(options).then(res => {
         if (res.data.results.length > 0) {
@@ -130,7 +131,8 @@ export default {
       //on récupère le premier comics du personnage
       const options2 = {
         orderBy: "onsaleDate",
-        endpoint: character.id + "/comics"
+        limit: 1,
+        endpoint: "characters/" + character.id + "/comics"
       };
       await get(options2).then(res => {
         if (res.data.results.length > 0) {
