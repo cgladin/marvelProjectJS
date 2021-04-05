@@ -1,8 +1,8 @@
 <template>
   <div>
     <button @click="get10random()" class="button">Recherche aléatoire</button>
-    <label class="label">
-      Recherche :
+    <label>
+      <span class="label"> Recherche : </span>
       <input class="input" type="text" v-model="searchInput" />
     </label>
     <button @click="handleSubmit" class="button">Rechercher</button>
@@ -73,13 +73,18 @@ export default {
 
 <style scoped>
 .input {
-  border-radius: 22px;
-  padding: 10px 0;
-  font-size: 1.1em;
-  color: black;
+  font-size: 1em;
+  border: none;
+  border-bottom: solid 2px black;
+  font-weight: bold;
+  background-color: rgb(242, 242, 242);
+}
+.input:focus {
+  text-shadow: none;
+  border-bottom: solid 2px #bb0b0b;
 }
 .label {
-  font-size: 1.2em;
+  font-size: 1.1em;
   font-weight: bold;
 }
 </style>

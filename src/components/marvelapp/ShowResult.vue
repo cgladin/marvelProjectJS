@@ -32,18 +32,24 @@
             <h3>{{ displayedCharacter.name }}</h3>
           </div>
           <div class="character-item">
-            <p>{{ displayedCharacter.description }}</p>
+            <p v-if="displayedCharacter.description">
+              Description : {{ displayedCharacter.description }}
+            </p>
             <div v-if="displayedCharacter.firstComics">
               <h4>Premier comics</h4>
               <p>{{ displayedCharacter.firstComics.title }}</p>
               <p>{{ firstComicsDate }}</p>
-              <p>{{ displayedCharacter.firstComics.description }}</p>
+              <p v-if="displayedCharacter.firstComics.description">
+                {{ displayedCharacter.firstComics.description }}
+              </p>
             </div>
             <div v-if="displayedCharacter.lastComics">
               <h4>Dernier comics</h4>
               <p>Titre : {{ displayedCharacter.lastComics.title }}</p>
               <p>Date : {{ lastComicsDate }}</p>
-              <p>{{ displayedCharacter.lastComics.description }}</p>
+              <p v-if="displayedCharacter.lastComics.description">
+                {{ displayedCharacter.lastComics.description }}
+              </p>
             </div>
           </div>
         </div>
@@ -200,7 +206,7 @@ export default {
   position: absolute;
   bottom: 20px;
   right: 50%;
-  background-color: red;
+  background-color: #bb0b0b;
   border-radius: 10px;
   color: white;
   padding: 20px;

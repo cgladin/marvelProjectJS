@@ -72,7 +72,7 @@ export default {
   border-radius: 20px;
   padding: 15px;
   margin-right: 20px;
-  background-color: rgba(253, 250, 250, 0.5);
+  background-color: rgba(253, 250, 250, 0.65);
 }
 .team {
   width: 30%;
@@ -80,7 +80,7 @@ export default {
   border-radius: 20px;
   background-color: #ebebeb;
   padding: 15px;
-  background-color: rgba(253, 250, 250, 0.5);
+  background-color: rgba(253, 250, 250, 0.65);
   display: flex;
   flex-direction: column;
 }

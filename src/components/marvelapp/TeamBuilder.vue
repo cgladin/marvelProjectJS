@@ -26,7 +26,7 @@
         />
       </div>
     </div>
-    <!--modal-->
+    <!--modal save-->
     <div class="modal" v-if="editTeamName">
       <div class="modal-content">
         <div v-if="this.characters.length > 0">
@@ -40,7 +40,7 @@
         <button @click="cancelAddTeam">Annuler</button>
       </div>
     </div>
-    <!--modal-->
+    <!--modal load-->
     <div class="modal" v-if="selectTeam">
       <div class="modal-content">
         <div v-if="teamsName.length > 0">
@@ -103,8 +103,10 @@ export default {
       this.showSuccess("personnage supprimé");
     },
     removeCharacters() {
-      this.$emit("updateTeamCharacters", []);
-      this.showSuccess("équipe supprimé");
+      if (this.characters.length > 0) {
+        this.$emit("updateTeamCharacters", []);
+        this.showSuccess("équipe supprimé");
+      }
     },
     removeTeams(name) {
       if (localStorage.getItem("charactersTeams")) {
@@ -125,8 +127,8 @@ export default {
     load() {
       if (localStorage.getItem("charactersTeams")) {
         this.teamsName = Object.keys(this.getTeams());
-        this.toggleSelectTeam();
       }
+      this.toggleSelectTeam();
     },
     cancelAddTeam() {
       this.teamName = "";
@@ -146,11 +148,13 @@ export default {
     },
     showSuccess(message) {
       this.successText = message;
-      this.successAdd = true;
-      setTimeout(() => {
-        this.successAdd = false;
-        this.successText = "";
-      }, 2000);
+      if (this.successAdd === false) {
+        this.successAdd = true;
+        setTimeout(() => {
+          this.successAdd = false;
+          this.successText = "";
+        }, 2000);
+      }
     },
     getTeams() {
       return JSON.parse(localStorage.getItem("charactersTeams"));
@@ -166,7 +170,7 @@ export default {
 }
 .thumbnailList {
   height: 100px;
-  border-radius: 20px 0 0 20px;
+  border-radius: 10px 0 0 10px;
 }
 .teamButtons {
   display: flex;
