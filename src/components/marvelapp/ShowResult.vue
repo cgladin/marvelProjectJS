@@ -45,7 +45,7 @@
                 Date : {{ firstComicsDate }}
               </p>
               <p v-if="displayedCharacter.firstComics.description">
-                {{ displayedCharacter.firstComics.description }}
+                Description : {{ displayedCharacter.firstComics.description }}
               </p>
             </div>
             <div v-if="displayedCharacter.lastComics">
@@ -57,7 +57,7 @@
                 Date : {{ lastComicsDate }}
               </p>
               <p v-if="displayedCharacter.lastComics.description">
-                {{ displayedCharacter.lastComics.description }}
+                Description : {{ displayedCharacter.lastComics.description }}
               </p>
             </div>
             <p v-if="!apiLoad">Chargement des données...</p>
