@@ -38,22 +38,31 @@
             <p v-else>Aucune description disponible pour ce personnage</p>
             <div v-if="displayedCharacter.firstComics">
               <h4>Premier comics</h4>
-              <p>{{ displayedCharacter.firstComics.title }}</p>
-              <p>{{ firstComicsDate }}</p>
+              <p v-if="displayedCharacter.firstComics.title">
+                {{ displayedCharacter.firstComics.title }}
+              </p>
+              <p v-if="displayedCharacter.firstComics.dates">
+                {{ firstComicsDate }}
+              </p>
               <p v-if="displayedCharacter.firstComics.description">
                 {{ displayedCharacter.firstComics.description }}
               </p>
             </div>
             <div v-if="displayedCharacter.lastComics">
               <h4>Dernier comics</h4>
-              <p>Titre : {{ displayedCharacter.lastComics.title }}</p>
-              <p>Date : {{ lastComicsDate }}</p>
+              <p v-if="displayedCharacter.lastComics.title">
+                Titre : {{ displayedCharacter.lastComics.title }}
+              </p>
+              <p v-if="displayedCharacter.lastComics.dates">
+                Date : {{ lastComicsDate }}
+              </p>
               <p v-if="displayedCharacter.lastComics.description">
                 {{ displayedCharacter.lastComics.description }}
               </p>
             </div>
+            <p v-if="!apiLoad">Chargement des données...</p>
             <p
-              v-if="
+              v-else-if="
                 !displayedCharacter.firstComics &&
                   !displayedCharacter.lastComics
               "
@@ -91,7 +100,8 @@ export default {
       displayedCharacter: null,
       popUp: false,
       infoText: "",
-      popupState: true
+      popupState: true,
+      apiLoad: false
     };
   },
   computed: {
@@ -124,6 +134,7 @@ export default {
   methods: {
     async showCharacter(character) {
       //affiche le character selectionné
+      this.apiLoad = false;
       this.toggleShowCharacter = true;
       this.displayedCharacter = character;
       //on récupère le dernier comics du personnage
@@ -148,6 +159,8 @@ export default {
           this.displayedCharacter.firstComics = res.data.results[0];
         }
       });
+      console.log(this.displayedCharacter.lastComics,this.displayedCharacter.firstComics);
+      this.apiLoad = true;
       //on update la view
       this.$forceUpdate();
     },
