@@ -39,10 +39,10 @@
             <div v-if="displayedCharacter.firstComics">
               <h4>Premier comics</h4>
               <p v-if="displayedCharacter.firstComics.title">
-                {{ displayedCharacter.firstComics.title }}
+                Titre : {{ displayedCharacter.firstComics.title }}
               </p>
               <p v-if="displayedCharacter.firstComics.dates">
-                {{ firstComicsDate }}
+                Date : {{ firstComicsDate }}
               </p>
               <p v-if="displayedCharacter.firstComics.description">
                 {{ displayedCharacter.firstComics.description }}
@@ -114,7 +114,8 @@ export default {
       ).toLocaleDateString("fr-FR", {
         weekday: "long",
         month: "long",
-        day: "numeric"
+        day: "numeric",
+        year: "numeric"
       });
     },
     lastComicsDate() {
