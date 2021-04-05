@@ -54,7 +54,8 @@
             </div>
             <p
               v-if="
-                !displayedCharacter.firstComics && displayedCharacter.lastComics
+                !displayedCharacter.firstComics &&
+                  !displayedCharacter.lastComics
               "
             >
               Aucun comics disponible
